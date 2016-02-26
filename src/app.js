@@ -7,6 +7,7 @@
 var UI = require('ui');
 var Vector2 = require('vector2');
 var ajax = require('ajax');
+var Settings = require('settings');
 
 ajax({
     url: 'https://codeship.com/api/v1/projects.json?api_key=' + Settings.option('api_key'),
@@ -43,7 +44,7 @@ ajax({
         projectCard.show();
         
         ajax({
-            url: 'https://codeship.com/api/v1/projects/'+projectMeta.id+'.json?api_key=' + Settings.option('api_key')
+            url: 'https://codeship.com/api/v1/projects/'+projectMeta.id+'.json?api_key=' + Settings.option('api_key'),
             type: 'json'
         }, function(data, status, request) {
             
