@@ -9,7 +9,7 @@ var Vector2 = require('vector2');
 var ajax = require('ajax');
 
 ajax({
-    url: 'https://codeship.com/api/v1/projects.json?api_key=833f1e01a8fc53c286007531620559ad59fd144f18a4795fc35b6e944c1d',
+    url: 'https://codeship.com/api/v1/projects.json?api_key=' + Settings.option('api_key'),
     type: 'json'
 }, function(data, status, request) {
     
@@ -43,11 +43,10 @@ ajax({
         projectCard.show();
         
         ajax({
-            url: 'https://codeship.com/api/v1/projects/'+projectMeta.id+'.json?api_key=833f1e01a8fc53c286007531620559ad59fd144f18a4795fc35b6e944c1d',
+            url: 'https://codeship.com/api/v1/projects/'+projectMeta.id+'.json?api_key=' + Settings.option('api_key')
             type: 'json'
         }, function(data, status, request) {
             
-
             
             if(data.builds[0].status == "success") {
                 var colour = '#008000';
@@ -71,6 +70,45 @@ ajax({
      function(error, status, request) {
          console.log('The ajax request failed: ' + error);
      });
+
+// Settings.config(
+//     { url: 'https://steveedson.co.uk/codeship-pebble' },
+//   function(e) {
+//     console.log('opening configurable');
+
+//   },
+//   function(e) {
+//       console.log('closed configurable');
+      
+//       JSON.stringify(e.options);
+      
+//       Settings.data('api_key', e.options.api_key);
+      
+//   }
+// );
+
+Pebble.addEventListener('showConfiguration', function(e) {
+  // Show config page
+  Pebble.openURL('https://steveedson.co.uk/codeship-pebble');
+});
+
+Pebble.addEventListener('webviewclosed', function(e) {
+  // Decode and parse config data as JSON
+  var config_data = JSON.parse(decodeURIComponent(e.response));
+  console.log('Config window returned: ', JSON.stringify(config_data));
+
+  // Prepare AppMessage payload
+  var dict = {
+    'api_key': config_data['api_key']
+  };
+
+  // Send settings to Pebble watchapp
+  Pebble.sendAppMessage(dict, function(){
+    console.log('Sent config data to Pebble');  
+  }, function() {
+    console.log('Failed to send config data!');
+  });
+});
 
 
 // var main = new UI.Card({
