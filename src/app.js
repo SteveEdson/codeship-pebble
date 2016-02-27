@@ -74,7 +74,6 @@ ajax({
 },
      function(error, status, request) {
          console.log('The ajax request failed for projects, URL: https://codeship.com/api/v1/projects/:id.json?api_key=' + Settings.option('api_key'));
-         console.dir(error);
      });
 
 // Settings.config(
@@ -99,7 +98,6 @@ Pebble.addEventListener('showConfiguration', function(e) {
 });
 
 Pebble.addEventListener('webviewclosed', function(e) {
-    console.dir(e);
   // Decode and parse config data as JSON
   var config_data = JSON.parse(decodeURIComponent(e.response));
   console.log('Config window returned: ', JSON.stringify(config_data));
