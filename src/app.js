@@ -19,8 +19,10 @@ ajax({
     for(var i = 0; i < data.projects.length; i++) {
         var project = data.projects[i];
         
+        var repoName = project.repository_name.split('/')[1];
+        
         items.push({
-            title: project.repository_name            
+            title: repoName         
         });    
     }
     
@@ -55,7 +57,9 @@ ajax({
                 var colour = '#ff0000';
             }
             
-            projectCard.title(projectMeta.repository_name);
+            var repoName = projectMeta.repository_name.split('/')[1];
+            
+            projectCard.title(repoName);
             projectCard.subtitle(data.builds[0].status);
             projectCard.body(data.builds[0].message);
             projectCard.bodyColor(colour);
