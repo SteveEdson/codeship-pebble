@@ -69,7 +69,8 @@ ajax({
     menu.show();
 },
      function(error, status, request) {
-         console.log('The ajax request failed: ' + error);
+         console.log('The ajax request failed for projects, URL: https://codeship.com/api/v1/projects/:id.json?api_key=' + Settings.option('api_key'));
+         console.dir(error);
      });
 
 // Settings.config(
@@ -94,6 +95,7 @@ Pebble.addEventListener('showConfiguration', function(e) {
 });
 
 Pebble.addEventListener('webviewclosed', function(e) {
+    console.dir(e);
   // Decode and parse config data as JSON
   var config_data = JSON.parse(decodeURIComponent(e.response));
   console.log('Config window returned: ', JSON.stringify(config_data));
@@ -103,6 +105,9 @@ Pebble.addEventListener('webviewclosed', function(e) {
     'api_key': config_data['api_key']
   };
 
+
+    Settings.option("api_key", dict.api_key);
+
   // Send settings to Pebble watchapp
   Pebble.sendAppMessage(dict, function(){
     console.log('Sent config data to Pebble');  
@@ -110,6 +115,20 @@ Pebble.addEventListener('webviewclosed', function(e) {
     console.log('Failed to send config data!');
   });
 });
+
+// Settings.config(
+//   { url: 'https://steveedson.co.uk/codeship-pebble' },
+//   function(e) {
+//     console.log('opening configurable');
+
+//     // Reset color to red before opening the webview
+//     //Settings.option('api_key', 'red');
+//   },
+//   function(e) {
+//     console.log('closed configurable');
+//       Settings.option("api_key", e.options.api_key);
+//   }
+// );
 
 
 // var main = new UI.Card({
