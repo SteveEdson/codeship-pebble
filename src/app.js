@@ -100,7 +100,7 @@ Pebble.addEventListener('showConfiguration', function(e) {
 Pebble.addEventListener('webviewclosed', function(e) {
   // Decode and parse config data as JSON
   var config_data = JSON.parse(decodeURIComponent(e.response));
-  console.log('Config window returned: ', JSON.stringify(config_data));
+  console.log('Config window returned: ', decodeURIComponent(e.response));
 
   // Prepare AppMessage payload
   var dict = {
