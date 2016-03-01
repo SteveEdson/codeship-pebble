@@ -1,7 +1,5 @@
 {
-    "appKeys": {
-        "api_key": 0
-    },
+    "appKeys": {},
     "capabilities": [
         "configurable"
     ],
