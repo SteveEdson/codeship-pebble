@@ -8,6 +8,7 @@ var UI = require('ui');
 var Vector2 = require('vector2');
 var ajax = require('ajax');
 var Settings = require('settings');
+var Vibe = require('ui/vibe');
 
 if(typeof Settings.option('api_key') == "undefined") {
     var card = new UI.Card({
@@ -78,8 +79,25 @@ ajax({
             projectCard.subtitle(data.builds[0].status);
             projectCard.body(data.builds[0].message);
             projectCard.bodyColor(colour);
+            projectCard.action('select', 'images/action_image_select.bmp');
             
             projectCard.show();
+            
+            
+                                    
+            projectCard.on('longClick', 'select', function(e) {
+                console.log("Long click");
+                Vibe.vibrate('double');
+                
+                ajax({
+                    method: 'post',
+                    url: 'https://codeship.com/api/v1/builds/'+data.builds[0].id+'/restart.json?api_key=' + Settings.option('api_key')
+                }, function() {
+                    Vibe.vibrate('short');
+                }, function() {
+                    Vibe.vibrate('long');
+                });
+            });
         }, function(error, status, request) {
             
         });
