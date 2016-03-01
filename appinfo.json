@@ -30,6 +30,11 @@
                 "type": "font"
             },
             {
+                "file": "images/ic_replay_white_24dp_1x.png",
+                "name": "IMAGES_IC_REPLAY_WHITE_24DP_1X_PNG",
+                "type": "png"
+            },
+            {
                 "file": "images/replay_white.bmp",
                 "name": "IMAGES_REPLAY_WHITE_BMP",
                 "type": "bitmap"
