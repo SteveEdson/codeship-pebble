@@ -79,7 +79,7 @@ ajax({
             projectCard.subtitle(data.builds[0].status);
             projectCard.body(data.builds[0].message);
             projectCard.bodyColor(colour);
-            projectCard.action('select', 'action_image_select');
+            projectCard.action('select', 'images/replay_white.bmp');
             
             projectCard.show();
             

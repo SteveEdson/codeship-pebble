@@ -30,6 +30,11 @@
                 "type": "font"
             },
             {
+                "file": "images/replay_white.bmp",
+                "name": "IMAGES_REPLAY_WHITE_BMP",
+                "type": "bitmap"
+            },
+            {
                 "file": "images/action_image_select.bmp",
                 "name": "IMAGES_ACTION_IMAGE_SELECT_BMP",
                 "type": "bitmap"
